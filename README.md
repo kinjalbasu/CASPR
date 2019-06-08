@@ -19,7 +19,7 @@ Following are the JARS used in the code -
   - Stanford CoreNLP : https://stanfordnlp.github.io/CoreNLP/download.html
   - Stanford CoreNLP model : https://stanfordnlp.github.io/CoreNLP/download.html
   
-__Note:__ All the JARS are given in the repository.
+__Note:__ All the JARS are given in the repository except Stanford CoreNLP model, as it is a very large file.
 
 ### How to Run the Code 
 1. All the JARS need to be added.
