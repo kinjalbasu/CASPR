@@ -31,7 +31,9 @@ public class Parent {
         //String question = "when was nikola_tesla born ?";
         //String question = "which scientist was a computer engineer?";
         String content = "There are two forks, two spoons and three bananas with four apples on the table.";
-
+        //String questions = "How many forks are on the table?";
+        //String questions = "How many utensils are on the table?";
+        //String questions = "How many fruits are on the table?";
 
         //paths
         String semanticPath = new File(SEMANTIC_PATH).getCanonicalPath();
