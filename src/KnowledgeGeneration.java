@@ -1,6 +1,6 @@
 import edu.mit.jwi.item.IIndexWord;
 import edu.mit.jwi.item.POS;
-import javafx.util.Pair;
+import java.util.AbstractMap.SimpleEntry;
 
 import java.io.*;
 import java.util.*;
@@ -10,7 +10,7 @@ public class KnowledgeGeneration {
     public static final String END_OF_SENTENCE = "\\.";
     public static final boolean SHOULD_WRITE_TO_FILE = false;
 
-    public static Pair<List<Rule>, List<Rule>> RepresentKnowledge(StorageManager manager, String content, BufferedWriter bw)
+    public static SimpleEntry<List<Rule>, List<Rule>> RepresentKnowledge(StorageManager manager, String content, BufferedWriter bw)
             throws IOException {
        // List<String> posFacts = new ArrayList<>();
        // List<String> dependenciesFacts = new ArrayList<>();
@@ -69,7 +69,7 @@ public class KnowledgeGeneration {
         List<Rule> ontologyRules = WordNet.WriteOntology(manager, SHOULD_WRITE_TO_FILE);
         List<Rule> baseRules = WordNet.GenerateBaseRulesForNouns(nouns);
         storyRules.addAll(baseRules);
-        return new Pair<>(storyRules, ontologyRules);
+        return new SimpleEntry<>(storyRules, ontologyRules);
     }
 
     private static void PrintRules(List<Rule> rules) {

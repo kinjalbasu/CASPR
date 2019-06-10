@@ -1,6 +1,6 @@
-import com.sun.javafx.fxml.builder.URLBuilder;
+
 import edu.stanford.nlp.trees.TypedDependency;
-import javafx.util.Pair;
+
 
 import java.util.ArrayList;
 import java.util.Iterator;

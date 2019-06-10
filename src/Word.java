@@ -1,7 +1,7 @@
 import edu.stanford.nlp.trees.GrammaticalRelation;
 import edu.stanford.nlp.trees.TypedDependency;
-import javafx.util.Pair;
-
+//import javafx.util.Pair;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -215,9 +215,9 @@ public class Word {
     private List<Rule> GeneratePropertyConstraints(QuestionInformation information) {
         List<Rule> rules = new ArrayList<>();
         Word predicate = new Word("_property", false);
-        List<Pair<Word, Word>> modifierPairs = this.GetNominalModifiers();
+        List<SimpleEntry<Word, Word>> modifierPairs = this.GetNominalModifiers();
 
-        for (Pair<Word, Word> modifier : modifierPairs) {
+        for (SimpleEntry<Word, Word> modifier : modifierPairs) {
             List<Literal> bodyList = new ArrayList<>();
             Literal concept = new Literal(this);
             Word preposition = modifier.getValue();
@@ -360,9 +360,9 @@ public class Word {
     private List<Rule> GenerateNominalModifierRules() {
         List<Rule> rules = new ArrayList<>();
         Word predicate = new Word("_property", false);
-        List<Pair<Word, Word>> modifierPairs = this.GetNominalModifiers();
+        List<SimpleEntry<Word, Word>> modifierPairs = this.GetNominalModifiers();
 
-        for (Pair<Word, Word> modifier : modifierPairs) {
+        for (SimpleEntry<Word, Word> modifier : modifierPairs) {
             List<Literal> bodyList = new ArrayList<>();
             Literal concept = new Literal(this);
             List<Word> numModifiers = modifier.getKey().GetNumericalModifiers();
@@ -503,8 +503,8 @@ public class Word {
         return numericalModifiers;
     }
 
-    private List<Pair<Word, Word>> GetNominalModifiers() {
-        List<Pair<Word, Word>> nominalModifierPairs = new ArrayList<>();
+    private List<SimpleEntry<Word, Word>> GetNominalModifiers() {
+        List<SimpleEntry<Word, Word>> nominalModifierPairs = new ArrayList<>();
         List<String> relations = new ArrayList<>(this.relationMap.keySet());
         relations.removeIf(x -> !x.startsWith("nmod"));
 
@@ -515,7 +515,7 @@ public class Word {
             if (!prepString.equals("")) preposition = new Word(prepString, false);
             List<Word> modifiers = this.relationMap.get(relation);
             for (Word modifier : modifiers) {
-                nominalModifierPairs.add(new Pair<>(modifier, preposition));
+                nominalModifierPairs.add(new SimpleEntry<>(modifier, preposition));
             }
         }
 
@@ -928,9 +928,9 @@ public class Word {
             List<Word> adjectiveDirectObjects = GetSupplimentaryFromAdjectives(directObjects);
             directObjects.addAll(adjectiveDirectObjects);
             for (Word directObject : directObjects) {
-                List<Pair<Word, Word>> nmods = directObject.GetNominalModifiers();
+                List<SimpleEntry<Word, Word>> nmods = directObject.GetNominalModifiers();
                 if (nmods.size() == 0) continue;
-                for (Pair<Word, Word> nmod : nmods) {
+                for (SimpleEntry<Word, Word> nmod : nmods) {
                     Word preposition = nmod.getValue();
                     if (preposition == null) continue;
                     List<Word> wordCollection = new ArrayList<>();

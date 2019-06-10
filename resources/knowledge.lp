@@ -210,9 +210,9 @@ solid(X, noun_substance) :- solid(X),properties_substance(X),not -solid(X, noun_
 space(X, noun_shape) :- angle(X, noun_shape).
 space(X, noun_shape) :- space(X),not -space(X, noun_shape).
 space(X, noun_shape) :- space(X),properties_shape(X),not -space(X, noun_shape).
-spoon(X, noun_artifact) :- spoon(X),not -spoon(X, noun_artifact),-spoon(X, noun_quantity).
+spoon(X, noun_artifact) :- spoon(X),not -spoon(X, noun_artifact),not spoon(X, noun_quantity).
 spoon(X, noun_artifact) :- spoon(X),properties_artifact(X),not -spoon(X, noun_artifact).
-spoon(X, noun_quantity) :- spoon(X),not -spoon(X, noun_quantity),not spoon(X, noun_artifact).
+spoon(X, noun_quantity) :- spoon(X),not -spoon(X, noun_quantity),-spoon(X, noun_artifact).
 spoon(X, noun_quantity) :- spoon(X),properties_quantity(X),not -spoon(X, noun_quantity).
 sports_equipment(X, noun_artifact) :- golf_equipment(X, noun_artifact).
 sports_equipment(X, noun_artifact) :- sports_equipment(X),not -sports_equipment(X, noun_artifact).

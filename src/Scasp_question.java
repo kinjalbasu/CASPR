@@ -4,7 +4,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.*;
 
-import javafx.util.Pair;
 
 public class Scasp_question {
 

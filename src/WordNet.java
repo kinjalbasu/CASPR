@@ -1,7 +1,7 @@
 import edu.mit.jwi.Dictionary;
 import edu.mit.jwi.IDictionary;
 import edu.mit.jwi.item.*;
-import javafx.util.Pair;
+import java.util.AbstractMap.SimpleEntry;
 
 import java.io.File;
 import java.io.IOException;
@@ -56,8 +56,8 @@ public class WordNet {
             return;
         }
 
-        HashMap<Pair<Integer, String>, List<IWordID>> senseMap = GetSenses(dictionary, idxWord);
-        for(Pair<Integer, String> senseRank : senseMap.keySet()){
+        HashMap<SimpleEntry<Integer, String>, List<IWordID>> senseMap = GetSenses(dictionary, idxWord);
+        for(SimpleEntry<Integer, String> senseRank : senseMap.keySet()){
             String sense = senseRank.getValue();
             Concept concept = new Concept(word, sense);
             String wordSense = String.format(CONCEPT_SENSE_FORMAT, word, sense);
@@ -140,9 +140,9 @@ public class WordNet {
         return hypernymMap;
     }
 
-    private static HashMap<Pair<Integer, String>, List<IWordID>> GetSenses(IDictionary dictionary, IIndexWord idxWord) {
+    private static HashMap<SimpleEntry<Integer, String>, List<IWordID>> GetSenses(IDictionary dictionary, IIndexWord idxWord) {
         List<IWordID> wordIDs = idxWord.getWordIDs();
-        HashMap<Pair<Integer, String>, List<IWordID>> senseMap = new HashMap<>();
+        HashMap<SimpleEntry<Integer, String>, List<IWordID>> senseMap = new HashMap<>();
         int id = 1;
         for(IWordID wordID : wordIDs){
             IWord word = dictionary.getWord(wordID);
@@ -153,7 +153,7 @@ public class WordNet {
             }
 
             wordIDList.add(wordID);
-            Pair<Integer, String> pair = new Pair<>(id++, sense);
+            SimpleEntry<Integer, String> pair = new SimpleEntry<>(id++, sense);
             senseMap.put(pair, wordIDList);
         }
 
@@ -329,7 +329,7 @@ public class WordNet {
         if(idxWord == null) {
             return new ArrayList<>();
         }
-        HashMap<Pair<Integer, String>, List<IWordID>> senseMap = GetSenses(dictionary, idxWord);
+        HashMap<SimpleEntry<Integer, String>, List<IWordID>> senseMap = GetSenses(dictionary, idxWord);
         HashMap<String, Integer> senseRankMap = GetRankMap(senseMap.keySet());
         for(Concept concept : concepts){
             if(senseRankMap.containsKey(concept.sense)) {
@@ -341,9 +341,9 @@ public class WordNet {
         return concepts;
     }
 
-    private static HashMap<String, Integer> GetRankMap(Set<Pair<Integer, String>> senseRanks) {
+    private static HashMap<String, Integer> GetRankMap(Set<SimpleEntry<Integer, String>> senseRanks) {
         HashMap<String, Integer> senseRankMap = new HashMap<>();
-        for(Pair<Integer, String> senseRank : senseRanks){
+        for(SimpleEntry<Integer, String> senseRank : senseRanks){
             String sense = senseRank.getValue().replaceAll("\\.", "_");
             senseRankMap.put(sense, senseRank.getKey());
         }

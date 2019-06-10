@@ -3,7 +3,7 @@
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.*;
-import javafx.util.Pair;
+import java.util.AbstractMap.SimpleEntry;
 
 public class Scasp_passage {
     public static void PrintRules(TreeSet<String> ruleString, BufferedWriter bw) throws IOException {
@@ -23,7 +23,7 @@ public class Scasp_passage {
         
         //System.out.println("PLEASE WAIT!!! I AM LEARNING");
         StorageManager manager = new StorageManager();
-        Pair<List<Rule>, List<Rule>> rulesPair = KnowledgeGeneration.RepresentKnowledge(manager, content, bw2);
+        SimpleEntry<List<Rule>, List<Rule>> rulesPair = KnowledgeGeneration.RepresentKnowledge(manager, content, bw2);
 
         TreeSet<String> ruleString = new TreeSet<>();
         /*System.out.println("%-------------------------------------------------------%");

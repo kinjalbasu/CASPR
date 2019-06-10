@@ -7,7 +7,8 @@ import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 import edu.stanford.nlp.trees.*;
-import javafx.util.Pair;
+//import javafx.util.Pair;
+import java.util.AbstractMap.SimpleEntry;
 import java.io.StringReader;
 
 import java.util.*;
@@ -65,7 +66,8 @@ public class Sentence {
     private String PreprocessSentence(List<Word> inputList, boolean isQ) {
         List<Word> lowerCasedList = getFormattedList(inputList);
         StringBuilder builder = new StringBuilder();
-        Pair<List<Word>, List<Rule>> result = ProcessOrganizations(lowerCasedList);
+        SimpleEntry<List<Word>, List<Rule>> result = ProcessOrganizations(lowerCasedList);
+        //Pair<List<Word>, List<Rule>> result = ProcessOrganizations(lowerCasedList);
         lowerCasedList = result.getKey();
         this.preProcessRules.addAll(result.getValue());
 
@@ -92,7 +94,7 @@ public class Sentence {
         return builder.toString().trim();
     }
 
-    private Pair<List<Word>, List<Rule>> ProcessBirthAndDeathDates(List<Word> inputList) {
+    private SimpleEntry<List<Word>, List<Rule>> ProcessBirthAndDeathDates(List<Word> inputList) {
         List<Rule> rules = new ArrayList<>();
         List<Word> wordList = new ArrayList<>();
         List<Word> wordCollection = new ArrayList<>();
@@ -142,7 +144,7 @@ public class Sentence {
             wordList.add(currentWord);
         }
 
-        return new Pair<>(wordList, rules);
+        return new SimpleEntry<>(wordList, rules);
     }
 
     private boolean CheckForLifeSpanFormat(List<Word> wordCollection) {
@@ -155,7 +157,7 @@ public class Sentence {
         return true;
     }
 
-    private Pair<List<Word>, List<Rule>> ProcessOrganizations(List<Word> inputList) {
+    private SimpleEntry<List<Word>, List<Rule>> ProcessOrganizations(List<Word> inputList) {
         List<Rule> rules = new ArrayList<>();
         List<Word> wordList = new ArrayList<>();
         List<Word> organizationWords = new ArrayList<>();
@@ -190,10 +192,10 @@ public class Sentence {
             rules.add(new Rule(head, null, false));
         }
 
-        return new Pair<>(wordList, rules);
+        return new SimpleEntry<>(wordList, rules);
     }
 
-    private Pair<List<Word>, List<Rule>> ProcessDates(List<Word> inputList) {
+    private SimpleEntry<List<Word>, List<Rule>> ProcessDates(List<Word> inputList) {
         List<Rule> rules = new ArrayList<>();
         List<Word> wordList = new ArrayList<>();
         List<Word> timeWords = new ArrayList<>();
@@ -230,7 +232,7 @@ public class Sentence {
             rules.addAll(GenerateRulesForDateParts(date, timeWords));
         }
 
-        return new Pair<>(wordList, rules);
+        return new SimpleEntry<>(wordList, rules);
     }
 
     private List<Rule> GenerateRulesForDateParts(Word date, List<Word> timeWords) {
