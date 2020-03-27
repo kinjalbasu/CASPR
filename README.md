@@ -1,4 +1,4 @@
-# common-sense-QA
+# common-sense-QA (CASPR)
 This is a Common Sense Question Answering System. It coverts any english passage to Answer Set Program (ASP) using JAVA and different 
 NLP libraries. Using goal directed s(ASP) engine, it is able to reason and answer questions written in english.   
 
